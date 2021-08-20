@@ -1,0 +1,651 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+    background-image: url('./assets/darkBackground.jpg');
+    background-size: cover;
+    background-position: bottom;
+    transition: 0.4ms ease-out;
+}
+
+.app.sunny {
+    background-image: url('./assets/nice-weather.jpg');
+}
+
+.search-box {
+    width: 75%;
+    margin: 0 auto 20px auto;
+}
+
+.search-box .search-bar {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 16px 16px 16px 16px;
+    box-shadow: 0px 5px rgba(0,0,0,0.5);
+    color: #282c34;
+    font-size: 20px;
+    transition: 0.4s ease;
+}
+
+.search-box .search-bar:focus {
+    background-color: lightcyan;
+}
+
+main {
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.75));
+    padding: 25px;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.location-box .location {
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.location-box .date {
+    color: white;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.weather-box {
+    text-align: center;
+}
+
+.weather-box .temp {
+    position: relative;
+    display: inline-block;
+    margin: 30px auto;
+    background-color: lightblue;
+    border-radius: 16px;
+    padding: 15px 25px;
+    color: white;
+    font-size: 100px;
+    font-weight: 900;
+    text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+    text-align: center;
+}
+
+.container {
+    width: 65%;
+    height: 80vh;
+    margin: 3% auto;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.73);
+}
+
+
+img {
+    max-width: 100%;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: 400;
+    color: #f9f9f9;
+    font-family: "Oxygen", sans-serif;
+    letter-spacing: 7px;
+    margin-top: 50px;
+}
+.current-time {
+    font-size: 35px;
+    font-weight: 100;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+.current-date {
+    font-size: 18px;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+.city {
+    width: 60%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-height: 500px;
+    position: relative;
+    background-position-x: -30px;
+}
+
+.title {
+    float: right;
+    font-family: "Oxygen", sans-serif;
+    padding: 30px 30px 0 0;
+}
+
+.title h2 {
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.title h3 {
+    font-size: 25px;
+    font-weight: bold;
+    color: #eee;
+    margin-top: 0px;
+    text-align: right;
+}
+
+.date-time {
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    width: 100%;
+    padding: 0 30px 10px 30px;
+    font-family: "Oxygen", sans-serif;
+}
+
+div#txt {
+    font-size: 35px;
+    font-weight: 100;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.dmy {
+    float: left;
+    text-align: left;
+    position: absolute;
+}
+
+.temperature {
+    float: right;
+    position: relative;
+    left: 40px;
+}
+
+.temperature p {
+    font-family: "Raleway", sans-serif;
+    font-size: 80px;
+    font-weight: 100;
+    margin: 0 40px;
+}
+
+.temperature p span {
+    font-size: 50px;
+    font-weight: 200;
+}
+
+.feelsLike {
+    color: white;
+    float: right
+}
+
+.forecast {
+    width: 40%;
+    float: left;
+    height: 100%;
+}
+
+.forecast-icon {
+    padding: 25px 0;
+    /* background: white; */
+}
+
+.today-weather h3 {
+    font-size: 40px;
+    color: #fff;
+    width: 80%;
+    margin: 30px auto 10px;
+    padding-bottom: 10px;
+    border-width: thin;
+    border-bottom: 1px solid #eee;
+}
+
+.today-weather ul li {
+    list-style-type: none;
+    width: 74%;
+    margin: 0 auto;
+    line-height: 39px;
+    border-width: thin;
+    border-bottom: 1px solid #777;
+    color: #eee;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.today-weather ul li span {
+    float: right;
+    padding-right: 10px;
+}
+
+.today-weather ul li:nth-child(5) {
+    border-bottom: none;
+}
+
+.mb-icon {
+    margin: 15px;
+}
+
+.mb-icon h2 {
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.bg-haze {
+    background-image: url('./assets/haze.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.bg-clouds {
+    background-image: url('./assets/clouds.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+.bg-rain {
+    background-image: url('./assets/rain.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+.bg-drizzle{
+    background-image: url('./assets/drizzle.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+.bg-dust {
+    background-image: url('./assets/dust.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+.bg-fog {
+    background-image: url('./assets/fog.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+.bg-snow {
+    background-image: url('./assets/snow.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+.bg-smoke {
+    background-image: url('./assets/smoke.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+.bg-tornado {
+    background-image: url('./assets/tornado.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+.bg-clear {
+    background-image: url('./assets/nice-weather.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+/*RESPONSIVE*/
+
+@media only screen and (max-width: 1350px) {
+    .temperature {
+        width: 100%;
+        padding-top: 85px;
+        left: 0;
+    }
+
+    .temperature p {
+        font-family: "Raleway", sans-serif;
+        font-size: 80px;
+        font-weight: 100;
+        margin: 0;
+    }
+
+    .temperature p span {
+        font-size: 50px;
+        font-weight: 200;
+        margin: 0;
+    }
+
+    .feelsLike {
+        float: left;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .temperature {
+        float: right;
+        padding-top: 0;
+        position: relative;
+        left: 40px;
+    }
+
+    .temperature p {
+        font-family: "Raleway", sans-serif;
+        font-size: 80px;
+        font-weight: 100;
+        float: right;
+        margin: 0 40px;
+    }
+
+    .temperature p span {
+        font-size: 50px;
+        font-weight: 200;
+    }
+
+    .feelsLike {
+        color: white;
+        float: right
+    }
+
+    .date-time {
+        position: unset;
+        bottom: 0;
+        color: #fff;
+        width: 100%;
+        padding: 0 30px 10px 30px;
+        font-family: "Oxygen", sans-serif;
+    }
+
+    .container {
+        width: 90%;
+        height: 80vh;
+        margin: 0 auto;
+        background-color: unset;
+    }
+
+    .city {
+        width: 100%;
+        height: 42%;
+        float: left;
+        background-size: cover;
+        -webkit-background-size: auto;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        min-height: 0;
+        position: relative;
+        background-position-x: -30px;
+    }
+
+    .forecast {
+        width: 100%;
+        float: left;
+        height: auto;
+    }
+
+    .forecast-icon {
+        padding: 25px 0;
+        /* background: white; */
+    }
+
+    .location-box .location {
+        color: white;
+        font-size: 30px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .location-box .date {
+        color: white;
+        font-size: 20px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .today-weather h3 {
+        font-size: 25px;
+        color: #fff;
+        width: 80%;
+        margin: 30px auto 10px;
+        padding-bottom: 10px;
+        border-width: thin;
+        border-bottom: 1px solid #eee;
+    }
+
+    .today-weather ul li {
+        width: 74%;
+        margin: 0 auto;
+        line-height: 39px;
+        border-width: thin;
+        border-bottom: 1px solid #777;
+        color: #eee;
+        font-weight: 600;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    .today-weather ul li span {
+        float: right;
+        padding-right: 10px;
+    }
+
+    .today-weather ul li:nth-child(5) {
+        border-bottom: none;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .temperature {
+        float: left;
+        width: 100%;
+        padding-top: 85px;
+        left: 0;
+    }
+
+    .temperature p {
+        font-family: "Raleway", sans-serif;
+        font-size: 80px;
+        font-weight: 100;
+        float: left;
+        margin: 0;
+    }
+
+    .temperature p span {
+        font-size: 50px;
+        font-weight: 200;
+        margin: 0;
+    }
+
+    .feelsLike {
+        float: left;
+    }
+
+    .date-time {
+        position: unset;
+        bottom: 0;
+        color: #fff;
+        width: 100%;
+        padding: 0 30px 10px 30px;
+        font-family: "Oxygen", sans-serif;
+    }
+
+    .container {
+        width: 90%;
+        height: 80vh;
+        margin: 0 auto;
+        background-color: unset;
+    }
+
+    .city {
+        width: 100%;
+        height: 50%;
+        float: left;
+        background-size: cover;
+        -webkit-background-size: auto;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        min-height: 0;
+        position: relative;
+        background-position-x: -30px;
+    }
+
+    .forecast {
+        width: 100%;
+        float: left;
+        height: auto;
+    }
+
+    .forecast-icon {
+        padding: 25px 0;
+        /* background: white; */
+    }
+
+    .location-box .location {
+        color: white;
+        font-size: 30px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .location-box .date {
+        color: white;
+        font-size: 20px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .today-weather h3 {
+        font-size: 25px;
+        color: #fff;
+        width: 80%;
+        margin: 30px auto 10px;
+        padding-bottom: 10px;
+        border-width: thin;
+        border-bottom: 1px solid #eee;
+    }
+
+    .today-weather ul li {
+        width: 74%;
+        margin: 0 auto;
+        line-height: 39px;
+        border-width: thin;
+        border-bottom: 1px solid #777;
+        color: #eee;
+        font-weight: 600;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    .mb-icon {
+        margin: 10px;
+    }
+
+    .mb-icon h2 {
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .current-time {
+        font-size: 25px;
+        font-weight: 100;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+    .current-date {
+        font-size: 18px;
+        font-weight: 100;
+        letter-spacing: 1px;
+    }
+}
+
+@media only screen and (max-width: 490px) {
+    .container {
+        width: 100%;
+        height: 80vh;
+        margin: 0 auto;
+        background-color: unset;
+    }
+    .city {
+        width: 100%;
+        height: auto;
+        float: left;
+        background-size: cover;
+        -webkit-background-size: auto;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        min-height: 0;
+        position: relative;
+        background-position-x: -30px;
+    }
+    .title {
+        float: right;
+        width: 60%;
+        font-family: "Oxygen", sans-serif;
+        padding: 10px 10px 0 0;
+    }
+
+    .title h2 {
+        text-align: right;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .title h3 {
+        font-size: 10px;
+        font-weight: bold;
+        color: #eee;
+        margin-top: 5px;
+        text-align: right;
+    }
+
+    .app {
+        background-image: unset;
+    }
+
+    main {
+        min-height: 100vh;
+        background-image: none;
+        padding: 0;
+    }
+
+    .forecast {
+        background-color: powderblue;
+    }
+
+    .today-weather h3 {
+        font-size: 25px;
+        color: #282c34;
+        width: 80%;
+        margin: 30px auto 10px;
+        padding-bottom: 10px;
+        border-width: thin;
+        border-bottom: 1px solid #eee;
+    }
+
+    .today-weather ul li {
+        width: 74%;
+        margin: 0 auto;
+        line-height: 39px;
+        border-width: thin;
+        border-bottom: 1px solid #777;
+        color: #282c34;
+        font-weight: 600;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+}
