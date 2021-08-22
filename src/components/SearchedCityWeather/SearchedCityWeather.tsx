@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Button} from "react-bootstrap";
 
-interface SearchedCityWeatherProps{
-    apiKey: string,
-    icon: string,
-    main: any
+interface SearchedCityWeatherProps {
+    apiKey: string
 }
 
 interface SearchedCityWeatherState {
@@ -21,8 +19,10 @@ interface SearchedCityWeatherState {
     sunset?: any,
     errorMsg?: string,
     sys: any,
-    weather: any,
-    wind: any
+    weather?: any,
+    wind: any,
+    main?: any,
+    icon?: any
 }
 
 const initialState: SearchedCityWeatherState = {
@@ -39,7 +39,9 @@ const initialState: SearchedCityWeatherState = {
     errorMsg: undefined,
     sys: {},
     weather: [],
-    wind: {}
+    wind: {},
+    main: "",
+    icon: ""
 }
 
 export function SearchedCityWeather(props: SearchedCityWeatherProps) {
@@ -51,7 +53,7 @@ export function SearchedCityWeather(props: SearchedCityWeatherProps) {
         axios
             .get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${
-                    city != "[object Object]" ? city : query
+                    !!city ? city : query
                 }&units=metric&APPID=${props.apiKey}`
             )
             .then((response) => {
@@ -60,7 +62,7 @@ export function SearchedCityWeather(props: SearchedCityWeatherProps) {
             })
             .catch(function (error) {
                 console.log(error);
-                setWeather({...weather});
+                setWeather({...initialState});
                 setQuery("");
                 setError("nem található");
             });
@@ -70,13 +72,24 @@ export function SearchedCityWeather(props: SearchedCityWeatherProps) {
         search("Pécs");
     }, []);
 
-    function handleSearch(){
-        if(query !== ""){
-            return search
-        }
-        else{
+    const handleSearch = (event: any) => {
+        if (event.key === "Enter") {
+            if (query !== "" || query !== undefined) {
+                search(query)
+            } else {
+                return
+            }
+        } else {
             return
         }
+    };
+
+    function handleReSearch() {
+            if (query !== "" || query !== undefined) {
+                search(query)
+            } else {
+                return
+            }
     }
 
     return (
@@ -89,45 +102,45 @@ export function SearchedCityWeather(props: SearchedCityWeatherProps) {
                         className="search-bar"
                         placeholder="Keresés..."
                         onChange={(e) => setQuery(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && handleSearch}
+                        onKeyPress={handleSearch}
                         value={query}
                     />
                 </div>
                 <ul>
-                    {typeof props.main != "undefined" ? (
+                    {typeof weather.main != "undefined" ? (
                         <div>
                             {" "}
                             <li className="cityHead">
                                 <p>
-                                    {weather.name}, {weather.sys.country}
+                                    {weather.name}, {weather.sys?.country}
                                 </p>
                                 <img
                                     className="temp"
-                                    src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+                                    src={`https://openweathermap.org/img/wn/${weather.weather?.[0]?.icon}.png`}
                                 />
                             </li>
                             <li>
                                 Hőmérséklet{" "}
                                 <span className="temp">
-                  {Math.round(props.main.temp)}°C ({weather.weather[0].main})
+                  {Math.round(weather.main?.temp)}°C ({weather.weather?.[0]?.main})
                 </span>
                             </li>
                             <li>
                                 Hőérzet{" "}
                                 <span className="temp">
-                  {Math.round(props.main.feels_like)}°C
+                  {Math.round(weather.main?.feels_like)}°C
                 </span>
                             </li>
                             <li>
                                 Páratartalom{" "}
                                 <span className="temp">
-                  {Math.round(props.main.humidity)}%
+                  {Math.round(weather.main?.humidity)}%
                 </span>
                             </li>
                             <li>
                                 Szél{" "}
                                 <span className="temp">
-                  {Math.round(weather.wind.speed)} Km/h
+                  {Math.round(weather.wind?.speed)} Km/h
                 </span>
                             </li>
                         </div>
@@ -137,8 +150,11 @@ export function SearchedCityWeather(props: SearchedCityWeatherProps) {
                         </li>
                     )}
                 </ul>
-                { query !== "" && query === weather.name ?
-                    <div style={{width: "100%", display: "flex"}}><Button variant="success" style={ {padding: "10px", margin: "10px auto" }} onClick={() => handleSearch()}>Újratöltés</Button></div>  : ""}
+                {query !== "" && query === weather.name ?
+                    <div style={{width: "100%", display: "flex"}}><Button variant="success"
+                                                                          style={{padding: "10px", margin: "10px auto"}}
+                                                                          onClick={() => handleReSearch}>Újratöltés</Button>
+                    </div> : ""}
             </div>
         </div>
     );

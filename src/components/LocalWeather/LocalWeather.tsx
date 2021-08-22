@@ -35,12 +35,6 @@ const dateBuilder = (d: Date) => {
     return `${year} ${month} ${date} ( ${day} )`;
 };
 
-const defaults = {
-    color: "white",
-    size: 112,
-    animate: true,
-};
-
 interface LocalWeatherProps {
     apiKey: string
 }
@@ -60,8 +54,7 @@ interface LocalWeatherState {
     feelsLike?: any,
     sunset?: any,
     errorMsg?: string,
-    main?: any,
-    timerID?: any
+    main?: any
 }
 
 const initialState: LocalWeatherState = {
@@ -79,8 +72,7 @@ const initialState: LocalWeatherState = {
     feelsLike: undefined,
     sunset: undefined,
     errorMsg: undefined,
-    main: "",
-    timerID: ""
+    main: ""
 }
 
 export function LocalWeather(props: LocalWeatherProps) {
@@ -102,84 +94,77 @@ export function LocalWeather(props: LocalWeatherProps) {
             alert("Nem elérhető helyzet");
         }
 
-        setState({ ...state,
-            timerID : setInterval(
-                () => getWeather(state.lat, state.lon),
-                600000
-            )
-        });
     }
 
     useEffect(() => {
-        start()
+        setTimeout(start, 1000);
         return () => {
             stop()
         }
-    });
+    }, []);
 
 
-    function stop() {
-        clearInterval(state.timerID);
-    }
+    function stop() {}
 
     const getPosition = () => {
         return new Promise(function (resolve, reject) {
             navigator.geolocation.getCurrentPosition(resolve, reject);
         });
     };
-    const getWeather = async (lat: any, lon: any) => {
-        const api_call = await fetch(
+
+    const getWeather = (lat: any, lon: any) => {
+        fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&&lang=hu&APPID=${props.apiKey}`
-        );
+        ).then(resp => {
+            const data:any = resp.json();
 
-        const data = await api_call.json();
-        setState({
-            ...state,
-            lat: lat,
-            lon: lon,
-            city: data.name,
-            temperatureC: Math.round(data.main.temp),
-            humidity: data.main.humidity,
-            feelsLike: Math.round(data.main.feels_like),
-            main: data.weather[0].main,
-            country: data.sys.country
-        });
-        switch (state.main) {
-            case "Haze":
-                setState({...state, icon: "CLEAR_DAY"});
-                break;
-            case "Clouds":
-                setState({...state, icon: "CLOUDY"});
-                break;
-            case "Rain":
-                setState({...state, icon: "RAIN"});
-                break;
-            case "Snow":
-                setState({...state, icon: "SNOW"});
-                break;
-            case "Dust":
-                setState({...state, icon: "WIND"});
-                break;
-            case "Drizzle":
-                setState({...state, icon: "SLEET"});
-                break;
-            case "Fog":
-                setState({...state, icon: "FOG"});
-                break;
-            case "Smoke":
-                setState({...state, icon: "FOG"});
-                break;
-            case "Tornado":
-                setState({
-                    ...state,
-                    icon: "WIND"
-                });
-                break;
-            default:
-                setState({...state, icon: "CLEAR_DAY"});
-        }
+            setState({
+                ...state,
+                lat: lat,
+                lon: lon,
+                city: data.name,
+                temperatureC: Math.round(data.main?.temp),
+                humidity: data.main?.humidity,
+                feelsLike: Math.round(data.main?.feels_like),
+                main: data.weather?.[0]?.main,
+                country: data.sys?.country
+            });
+            switch (state.main) {
+                case "Haze":
+                    setState({...state, icon: "CLEAR_DAY"});
+                    break;
+                case "Clouds":
+                    setState({...state, icon: "CLOUDY"});
+                    break;
+                case "Rain":
+                    setState({...state, icon: "RAIN"});
+                    break;
+                case "Snow":
+                    setState({...state, icon: "SNOW"});
+                    break;
+                case "Dust":
+                    setState({...state, icon: "WIND"});
+                    break;
+                case "Drizzle":
+                    setState({...state, icon: "SLEET"});
+                    break;
+                case "Fog":
+                    setState({...state, icon: "FOG"});
+                    break;
+                case "Smoke":
+                    setState({...state, icon: "FOG"});
+                    break;
+                case "Tornado":
+                    setState({
+                        ...state,
+                        icon: "WIND"
+                    });
+                    break;
+                default:
+                    setState({...state, icon: "CLEAR_DAY"});
+            }
+        })
     };
-
 
     if (!state) {
         return <span>Töltődik...</span>;
@@ -228,9 +213,7 @@ export function LocalWeather(props: LocalWeatherProps) {
                             </div>
                         </div>
                     </div>
-
                 </div>
-                {/*<Forecast icon={state.icon} weather={this.state.main}/>*/}
             </React.Fragment>
         );
     } else {
@@ -243,7 +226,7 @@ export function LocalWeather(props: LocalWeatherProps) {
                     width: "100%",
                     height: "100%"
                 }}>
-                    <h3 style={{color: "white", marginTop: "10px"}}>
+                    <h3 style={{color: "#dedede", marginTop: "10px"}}>
                         A jelenlegi tartózkodási helyed rögtön megjelenik... Kis türelmet
                     </h3>
                 </div>

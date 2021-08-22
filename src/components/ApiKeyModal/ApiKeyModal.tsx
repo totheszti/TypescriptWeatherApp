@@ -1,6 +1,4 @@
 import {Modal, Button} from 'react-bootstrap';
-
-import './ApiKeyModal.css'
 import {MouseEventHandler} from "react";
 
 interface ApiKeyProps {

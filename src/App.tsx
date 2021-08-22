@@ -3,6 +3,7 @@ import './App.css';
 import {ApiKeyModal} from "./components/ApiKeyModal/ApiKeyModal";
 import {Greeting} from "./components/Greeting/Greeting";
 import {LocalWeather} from "./components/LocalWeather/LocalWeather";
+import {SearchedCityWeather} from "./components/SearchedCityWeather/SearchedCityWeather";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
     );
 
     function handleClose() {
+        console.log('handleClose', state);
         setState({
             ...state,
             show: false,
@@ -21,6 +23,7 @@ function App() {
     }
 
     function onChangeInput(apiKey: string) {
+        console.log('onChangeInput', state);
         setState({
             ...state,
             apiKey: apiKey,
@@ -29,12 +32,18 @@ function App() {
 
     function bodyRender() {
         if(state.apiKey && !state.show) {
-            return <div className="container"><LocalWeather apiKey={state.apiKey}/></div>
+            console.log('bodyRender', state);
+            return <div className="container">
+                <LocalWeather apiKey={state.apiKey}/>
+                <SearchedCityWeather apiKey={state.apiKey}/>
+            </div>
         }
         else {
             return
         }
     }
+
+    console.log('App', state);
 
     return (
         <div className="app">

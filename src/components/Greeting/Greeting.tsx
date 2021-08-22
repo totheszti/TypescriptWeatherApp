@@ -15,5 +15,5 @@ export function Greeting(){
     else if (hrs >= 17 && hrs <= 24)
         greet = '🌇 Jó estét!';
 
-    return <h1 style={ {textAlign : 'center'}}>{greet}</h1>
+    return <h1 style={ {textAlign : 'center', marginTop: 0}}>{greet}</h1>
 }
