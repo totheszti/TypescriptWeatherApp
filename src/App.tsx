@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
 import {ApiKeyModal} from "./components/ApiKeyModal/ApiKeyModal";
-// import {Greeting} from "./components/Greeting/Greeting";
-import {LocalWeather} from "./components/LocalWeather/LocalWeather";
 import {Greeting} from "./components/Greeting/Greeting";
+import {LocalWeather} from "./components/LocalWeather/LocalWeather";
 
 function App() {
 
@@ -39,8 +38,8 @@ function App() {
 
     return (
         <div className="app">
-            <Greeting/>
             <ApiKeyModal show={state.show} onChangeInput={onChangeInput} handleClose={handleClose}/>
+            <Greeting/>
             {bodyRender()}
         </div>
     );
